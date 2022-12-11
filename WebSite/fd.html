@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Management System</title>
+    <link rel="shortcut icon"
+        href="https://www.kindpng.com/picc/m/567-5674919_inventory-management-inventory-management-system-png-transparent-png.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="./styles/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/css/style.css">
+</head>
+
+<body data-aos="zoom-in-up">
+    <div class="container">
+        <h1 class="text-center bg-white mb-0 pt-3">University Management System</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="erd.html">ER-Diagrams</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="fd.html">Functional Dependency</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="normalization.html">Normalization</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="queries.html">Queries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="transaction.html">Transactions and
+                                Indexes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h2 class="text-center bg-white mb-0 pt-3 text-danger">Functional Dependencies</h2>
+        <div class="d-flex justify-content-center align-items-center mt-4" id="erds">
+            <a href="#pic">Picture</a>
+            <a href="img/FD.pdf" download>Download PDF</a>
+        </div>
+        <ol type="A" class="mt-3 text-decoration-underline text-danger">
+            <li>FD</li>
+            <li>Usage of keys and superkeys</li>
+        </ol>
+        <div class="code">
+            <pre>
+                <code>
+    <strong>Student(s_id, name, address, age, sex, gpa)</strong>
+    {s_id → name, s_id → address, s_id → age, s_id → sex, s_id → gpa}
+    {name → sex}
+    {name, s_id} ⇒ is a superkey
+    {s_id} ⇒ key
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>Grade(s_id,marks, bonus)</strong>
+    {s_id → marks, bonus}
+    {s_id} ⇒ key
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>Course(course_id, name)</strong>
+    {course_id → name}
+    {name → course_id}
+    This is non functional dependency
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>Professor(prof_id, name, experience, dept_id)</strong>
+    {prof_id → name}
+    {name → prof_id}
+    {prof_id, name} ⇒ superkey
+    {prof_key} ⇒  key
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>Books(books_id, name, genre)</strong>
+    {books_id → name, book_id → genre}
+    {name → genre}
+    {book_id, name} ⇒ superkey
+    {book_id} ⇒ key
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>Library(name, no_books, library_id, books_id)</strong>
+    {book_id → no_boos}
+    {library_id → name, library_id → no_books}
+    {book_id, lib_id} ⇒ superkey
+    {book_id} ⇒ key
+                </code>
+            </pre>
+            <pre>
+                <code>
+    <strong>—---------Common FDs—------</strong>
+    {s_id → marks, s_id → book_id}
+    {book_id → library_id, library_name}
+    {s_id →  course_id, course_name, course_id → section_name}
+    {dept_id → prof_id, dept_id → assistant_id, section_id}
+                </code>
+            </pre>
+        </div>
+
+        <h5 class="text-danger text-center">NOTE: A few tables don't have functional dependency!(example 3);</h5>
+        <div class="container mt-5 text-center" id="pic" data-aos="flip-up">
+            <h2 class="text-primary bg-danger">Picture</h2>
+            <img src="img/FDs(img).png" class="w-50" alt="erd">
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
