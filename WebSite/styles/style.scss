@@ -3,23 +3,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: all .7s ease;
 }
 
 html{
     scroll-behavior: smooth;
 }
 
+
 body{
     font-family: 'Sora', sans-serif;
     background-color: #10346f;
 }
 
+::selection{
+    background-color: #4b64f4;
+    color: #fff;
+}
+
+
 @mixin buttons{
-    background-color: #8b9cfb;
+    background-color: #4b64f4;
     border-radius: 15px;
     padding: 0 10px;
     &:hover{
-        background-color: #4660f0;
+        background-color: #2c3d9f;
     }
 }
 
@@ -28,6 +36,9 @@ body{
     border-radius: 15px !important;
 }
 
+a{
+    color: #fff !important;
+}
 
 .navbar{
     border-top: 2px solid #0b2651;
@@ -35,15 +46,8 @@ body{
     padding: 20px 0;
     .nav-item{
         @include buttons();
-        // background-color: #8b9cfb;
-        // border-radius: 15px;
-        // padding: 0 10px;
         &:not(:last-child){
             margin-right: 20px;
-        }
-
-        &:hover{
-            background-color: #4660f0;
         }
     }
 }
@@ -58,4 +62,8 @@ body{
             margin-right: 30px;
         }
     }
+}
+
+#inx, #tran{
+    padding-left: 50px;
 }

@@ -48,6 +48,96 @@
             </div>
         </nav>
         <h2 class="text-center bg-white mb-0 pt-3 text-danger">Transactions and Indexes</h2>
+        <div class="d-flex justify-content-center align-items-center mt-4" id="erds">
+            <a href="#tran">Transactions</a>
+            <a href="#inx">Indexes</a>
+            <a href="img/TransactionAndIndexes.pdf" download>Download PDF</a>
+            <a href="https://www.linode.com/docs/guides/a-primer-on-sql-transactions/" target="_blank">More info</a>
+        </div>
+        <div class="w-75 m-auto text-center text-primary mt-5" style="border-radius: 10px;">
+            <h1>Transcation</h1>
+            <p>
+                A transaction is the propagation of one or more changes to the database. For example, if you are
+                creating a record or updating a record or deleting a record from the table, then you are performing a
+                transaction on that table.
+            </p>
+        </div>
+        <div class="mt-5" id="tran">
+            <pre>
+                <code>
+<strong class="text-danger">1)Show All students who's older than 20(USE COMMIT)</strong>
+START TRANSACTION;
+	SELECT * FROM Student
+	WHERE Student.age > 20;
+COMMIT;
+
+<strong class="text-danger">2)Show the book by name Harry Potter and change it to 'Harry' ROLLBACK it than</strong>
+START TRANSACTION;
+	UPDATE Books SET Books.name = 'Harry' WHERE Books.name = 'Harry Potter' LIMIT 1;
+	SELECT * FROM Books WHERE Books.name = 'Harry';
+ROLLBACK;
+SELECT * FROM Books WHERE Books.name = 'Harry';
+<strong class="text-danger">
+3)Add to Students 1 bonus points if they have 0; (ROLLBACK)</strong>
+SELECT * FROM Grade WHERE bonus = 0;
+START TRANSACTION;
+	UPDATE Grade SET bonus = (bonus + 1) WHERE bonus = 0;
+	SELECT * FROM Grade WHERE bonus = 0;
+ROLLBACK;
+SELECT * FROM Grade WHERE bonus = 0;
+<strong class="text-danger">
+4)Create a Transaction that checks if there are any students with GPA 0 
+  then delete him/her from the table.
+  (USE ROLLBACK. OR if u really want to kick them from university than use COMMIT😁)
+</strong>
+SELECT * FROM Student WHERE gpa = 0;
+START TRANSACTION;
+	DELETE FROM Student WHERE gpa = 0;
+	SELECT * FROM Student WHERE gpa = 0;
+ROLLBACK;
+SELECT * FROM Student WHERE gpa = 0;
+
+                </code>
+            </pre>
+        </div>
+        <div data-aos="flip-left">
+            <div class="w-75 m-auto text-center text-primary mt-5" style="border-radius: 10px;">
+                <h1>Indexes</h1>
+                <p>
+                    That we have too many tables and tuples, maybe sometimes it works too slow.
+                    Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot
+                    see
+                    the indexes, they are just used to speed up searches/queries.
+
+                </p>
+            </div>
+            <div class="mt-5" id="inx">
+                <pre>
+                <code>
+<strong class="text-danger">1)Create index for student_id;</strong>
+CREATE INDEX inx_Students ON Student(student_id);
+SHOW indexes FROM Student;
+SELECT student_id FROM Student USE INDEX(inx_Students);
+
+
+<strong class="text-danger">2)Create index for book names and book genre;</strong>
+SELECT * FROM Books;
+CREATE INDEX inx_books ON Books(name, genre);
+show indexes FROM Books;
+SELECT name, genre FROM Books USE INDEX(inx_books);
+
+
+<strong class="text-danger">3)Create index for student marks;</strong>
+SELECT * FROM Grade;
+CREATE INDEX inx_grade ON Grade(marks);
+SHOW indexes FROM Grade;
+SELECT marks FROM Grade USE INDEX(inx_grade);
+                </code>
+            </pre>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
