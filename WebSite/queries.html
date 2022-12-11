@@ -48,6 +48,129 @@
             </div>
         </nav>
         <h2 class="text-center bg-white mb-0 pt-3 text-danger">SQL Queries</h2>
+        <div class="d-flex justify-content-center align-items-center mt-4" id="erds">
+            <a href="#tran">Transactions</a>
+            <a href="#inx">Indexes</a>
+            <a href="img/TransactionAndIndexes.pdf" download>Download PDF</a>
+            <a href="https://www.linode.com/docs/guides/a-primer-on-sql-transactions/" target="_blank">More info</a>
+        </div>
+        <div class="w-75 m-auto text-center text-primary mt-5" style="border-radius: 10px;">
+            <h1>Query</h1>
+            <p>
+                A query is a request for data or information from a database table or combination of tables. This data
+                may be generated as results returned by Structured Query Language (SQL) or as pictorials, graphs or
+                complex results, e.g., trend analyses from data-mining tools.
+            </p>
+        </div>
+
+        <!-- queries  -->
+        <div class="mt-5" id="tran">
+            <pre>
+                <code>
+<strong class="text-danger">1)Find student_id, name, and course name of Students who take 2 course : Database and FrontEnd(Projection, Joins)</strong>
+SELECT Student.student_id, Student.name, Course.course_id, Course.name 
+FROM Student, Course, Enroll 
+WHERE Student.student_id = Enroll.student_id AND Enroll.course_id = Course.course_id 
+AND (COURSE.name = 'FrontEnd' OR Course.name = 'Database');
+
+
+<strong class="text-danger">2)Find the id and name of Students who live in Kazakhstan</strong>
+SELECT student_id, name, address FROM Student WHERE address = 'Kazakhstan';
+
+
+<strong class="text-danger">3)Find the name and major of students who has GPA greater or equal 3(Joins)</strong>
+SELECT Student.name, Student.gpa, Major.name FROM Student, Major 
+WHERE Student.student_id = Major.student_id AND Student.gpa >= 3;
+
+
+<strong class="text-danger">4)Show name and Course name of students who choose the Database course(Joins)</strong>
+SELECT Student.name, Course.name FROM Course, Student INNER JOIN
+Enroll ON Student.student_id = Enroll.student_id 
+WHERE (Course.course_id = Enroll.course_id AND Course.name = 'Database');
+
+
+<strong class="text-danger">5)Find all information about students with highest GPA(Aggregations)</strong>
+SELECT * FROM Student WHERE Student.gpa = (SELECT MAX(gpa) FROM Student);
+
+
+<strong class="text-danger">6)Find id and name of student who has age less than 18;</strong>
+SELECT student_id, name, age FROM Student 
+WHERE age < 18;
+
+
+<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
+
+<strong class="text-danger">8) Find id and name of professors who teaches FrontEnd course(Joins)</strong>
+SELECT Professor.name, Course.name
+FROM Course, Professor RIGHT JOIN Section ON Professor.prof_id = Section.prof_id
+WHERE(Section.course_id = Course.course_id)
+OR Course.name = 'FrontEnd';
+
+
+<strong class="text-danger">
+9)Find Professor's Experience, if it's greater than 10 years and less than 20 
+  than print he is 'Experienced Professor' else if he's experience greater than 20 
+  than print “Senior Professor”; else “Junior Professor”; (If else statements)</strong>
+Select Professor.name, Professor.experience,
+ CASE
+	WHEN experience >= 10 AND experience < 20 THEN 'Experienced professor'
+	WHEN experience >= 20 THEN 'Senior Professor'
+	Else 'Junior Professor'
+	END AS Experience
+from Professor;
+
+
+<strong class="text-danger">10)Create Function That gets bonus and mark of student as a parameter and returns the total(Functions)</strong>
+DELIMITER $$
+CREATE FUNCTION getTotal(bonus INT, mark INT) 
+RETURNS decimal(9,2)
+DETERMINISTIC
+BEGIN
+    declare total DECIMAL(9,2);
+    SET total = bonus + mark;
+    return total;
+END$$
+DELIMITER ;
+SELECT marks, bonus, getTotal(Grade.marks, Grade.bonus) FROM Grade;
+
+
+<strong class="text-danger">11)Create Procedure that show fullname and experience of Professors in ascending order(Procedure)</strong>
+DELIMITER $$
+CREATE PROCEDURE showProfessors()
+BEGIN
+  SELECT name, experience FROM Professor;
+END$$
+DELIMITER ;
+
+CALL showProfessors();
+
+
+<strong class="text-danger">12)Order Students, First by Their Age than by their GPA on Ascending order(Ordering)</strong>
+SELECT gpa, age FROM Student ORDER BY age, gpa ASC;
+
+<!-- start from 13 -->
+<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
+
+<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
+
+<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
+
+<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+                </code>
+            </pre>
+        </div>
+
+
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
