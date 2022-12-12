@@ -49,9 +49,9 @@
         </nav>
         <h2 class="text-center bg-white mb-0 pt-3 text-danger">SQL Queries</h2>
         <div class="d-flex justify-content-center align-items-center mt-4" id="erds">
-            <a href="#tran">Transactions</a>
-            <a href="#inx">Indexes</a>
-            <a href="img/TransactionAndIndexes.pdf" download>Download PDF</a>
+            <a href="#que">Queries</a>
+            <a href="rAlgebra.html">Relational Algebra</a>
+            <a href="img/TransactionAndIndexes.pdf">Download PDF</a>
             <a href="https://www.linode.com/docs/guides/a-primer-on-sql-transactions/" target="_blank">More info</a>
         </div>
         <div class="w-75 m-auto text-center text-primary mt-5" style="border-radius: 10px;">
@@ -62,9 +62,13 @@
                 complex results, e.g., trend analyses from data-mining tools.
             </p>
         </div>
-
+        <div class="d-flex justify-content-around bg-danger text-white p-2 fs-4 flex-column align-items-center"
+            style="border-radius: 0 0 20px 20px;">
+            <div>Function, Views, Subqueries, Joins, Procedures, Triggers</div>
+            <div>Total : 26</div>
+        </div>
         <!-- queries  -->
-        <div class="mt-5" id="tran">
+        <div class="mt-5" id="que">
             <pre>
                 <code>
 <strong class="text-danger">1)Find student_id, name, and course name of Students who take 2 course : Database and FrontEnd(Projection, Joins)</strong>
@@ -150,21 +154,110 @@ CALL showProfessors();
 <strong class="text-danger">12)Order Students, First by Their Age than by their GPA on Ascending order(Ordering)</strong>
 SELECT gpa, age FROM Student ORDER BY age, gpa ASC;
 
-<!-- start from 13 -->
-<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+
+<strong class="text-danger">13) Find Assistant and Professor where assistant and professor works in one department(Joins, AS)</strong>
+SELECT DISTINCT Professor.name as Professor, Assistant.name as Assistant, 
+Professor.dept_id, Assistant.dept_id
+FROM Assistant INNER JOIN 
+Professor ON Assistant.dept_id = Professor.dept_id;
+
+
+<strong class="text-danger">14)Update cours_name to Django where it's Java;(update)</strong>
+UPDATE Course SET Course.name = 'Django' WHERE Course.name = 'Java' LIMIT 1;
+
+
+<strong class="text-danger">15)Create view that shows Students from Indonesia(View)</strong>
+CREATE VIEW Indonesian_Students AS
+SELECT *
+FROM Student
+WHERE address = 'Indonesia';
+SELECT * FROM indonesian_students;
+
+
+<strong class="text-danger">16)If there any student at university from Africa print YES, else print NO(statements)</strong>
+SELECT address,
+    CASE 
+      WHEN EXISTS(SELECT address FROM Student 
+                  WHERE address = 'Africa') THEN 'YES!'
+        ELSE 'NO!'
+    END
+FROM Student WHERE address = 'Africa';
+
+
+<strong class="text-danger">17) Find the name of  professor who has experience more than others(NOT IN)</strong>
+SELECT Professor.name, MAX(experience)
+FROM Professor
+WHERE experience NOT IN (
+    SELECT MAX(experience) 
+    FROM Professor 
+);
+
+
+<strong class="text-danger">18)Union info from Assitants with info from Professor(UNION, ALL)</strong>
+SELECT * 
+     FROM Assistant
+     INNER JOIN Professor
+     ON Assistant.dept_id = Professor.dept_id
+UNION ALL
+     SELECT *
+     FROM Professor
+     INNER JOIN Assistant
+     ON Professor.dept_id = Assistant.dept_id;
+
+
+<strong class="text-danger">19)Find if Any assistant age is same with experience age of Professor(ANY)</strong>
+SELECT name, age
+FROM Assistant
+WHERE age = ANY
+  (SELECT experience
+  FROM Professor
+  WHERE experience > 18);
+
+
+<strong class="text-danger">20)Create View that shows Books with Genre Drama(View)</strong>
+CREATE VIEW drama_books AS
+SELECT *
+FROM Books
+WHERE genre = 'Drama';
+SELECT * FROM drama_books;
+
+
+<strong class="text-danger">21)Find what kind of books does students like more. Show genre and name of books(Join)</strong>
+SELECT Books.name, Books.genre 
+FROM Books JOIN Borrow 
+ON Borrow.book_id = Books.book_id;
+
+
+<strong class="text-danger">22)Create view that shows name and age of assistants(View)</strong>
+CREATE VIEW info_assistants AS
+SELECT Assistant.name, Assistant.age
+FROM Assistant;
+SELECT * FROM info_assistants;
+
+
+<strong class="text-danger">23)Create Procedure that shows all books in library(Procedure)</strong>
+DELIMITER $$
+    CREATE PROCEDURE showBooks()
+    BEGIN
+         SELECT Books.name FROM Books;
+     END$$
+DELIMITER ;
+CALL showBooks();
+
+
+<strong class="text-danger">24)</strong>
 SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
 
 
-<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+<strong class="text-danger">25)</strong>
 SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
 
 
-<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
+<strong class="text-danger">26)</strong>
 SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
 
 
-<strong class="text-danger">7)Find how many Students has gpa lower than 1(Aggregations)</strong>
-SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
                 </code>
             </pre>
         </div>

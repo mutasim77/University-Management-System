@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Management System</title>
+    <link rel="shortcut icon"
+        href="https://www.kindpng.com/picc/m/567-5674919_inventory-management-inventory-management-system-png-transparent-png.png"
+        type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="./styles/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/css/style.css">
+</head>
+
+<body data-aos="zoom-in-up">
+    <div class="container">
+        <h1 class="text-center bg-white mb-0 pt-3">University Management System</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="erd.html">ER-Diagrams</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="fd.html">Functional Dependency</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="normalization.html">Normalization</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="queries.html">Queries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="transaction.html">Transactions and
+                                Indexes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h2 class="text-center bg-white mb-0 pt-3 text-danger">SQL Queries</h2>
+        <div class="d-flex justify-content-center align-items-center mt-4" id="erds">
+            <a href="queries.html">Queries</a>
+            <a href="#que">Relational Algebra</a>
+            <a href="img/TransactionAndIndexes.pdf">Download PDF</a>
+            <a href="https://www.guru99.com/relational-algebra-dbms.html" target="_blank">More info</a>
+        </div>
+        <div class="w-75 m-auto text-center text-primary mt-5" style="border-radius: 10px;">
+            <h1>Relational Algebra</h1>
+            <p>
+                RELATIONAL ALGEBRA is a widely used procedural query language. It collects instances of relations as
+                input and gives occurrences of relations as output. It uses various operations to perform this action.
+                SQL Relational algebra query operations are performed recursively on a relation. The output of these
+                operations is a new relation, which might be formed from one or more input relations.
+            </p>
+        </div>
+        <div class="d-flex justify-content-around bg-danger text-white p-2 fs-4 flex-column align-items-center"
+            style="border-radius: 0 0 20px 20px;">
+            <div>Function, Views, Subqueries, Joins, Procedures, Triggers</div>
+            <div>Total : 26</div>
+        </div>
+        <!-- queries  -->
+        <div class="mt-5" id="que">
+            <pre>
+                <code>
+
+<strong class="text-danger">1)</strong>
+<strong class="text-danger">π</strong> s_id, s_name, c_id, c_id (Student <strong class="text-danger">⋈</strong> S.s_id = E.s_id Enroll ^ Enroll <strong class="text-danger">⋈</strong> E.c_id = C.c_id Course ^
+(c_name= 'Database' ^ c_name = 'FrontEnd')(Student, Course, Enroll))
+
+
+<strong class="text-danger">2)</strong>
+<strong class="text-danger">π</strong>  s_id, name, address (<strong class="text-danger">σ</strong> address = 'Kazakhstan' (Student))
+
+
+<strong class="text-danger">3)</strong>
+<strong class="text-danger">π</strong>  s_id, s_gpa, m_name (Student <strong class="text-danger">⋈</strong> S.s_id = M.s_id Major ^ S.gpa = 3 (Student, Major))
+
+
+
+<strong class="text-danger">4)</strong>
+<strong class="text-danger">π</strong>  s_name, c_name (Student <strong class="text-danger">⋈</strong> S.s_id = E.s_id Enroll ^ Enroll <strong class="text-danger">⋈</strong> E.c_id = C.c_id Course ^ 
+c_name= 'Database'(Student, Course, Enroll))
+
+
+<strong class="text-danger">5)</strong>
+MAX := Y Max(Gpa)(Student)
+<strong class="text-danger">σ</strong> gpa = MAX(Student)
+
+
+<strong class="text-danger">6)</strong>
+<strong class="text-danger">π</strong>  s_id, name, age ( <strong class="text-danger">σ</strong> age < 18 (Student))
+
+
+<strong class="text-danger">7)</strong>
+Counter := Y COUNT(GPA)
+<strong class="text-danger">σ</strong> gpa = (Counter(Student) < 1)
+
+
+<strong class="text-danger">8)</strong>
+<strong class="text-danger">π</strong> p_name, c_name (Professor <strong class="text-danger">⋈</strong> P.p_id = S.p_id Section ^ Section <strong class="text-danger">⋈</strong> S.c_id = C.c_id Course ^ 
+c_name = 'FrontEnd'(Professor, Section, Course))
+
+
+<strong class="text-danger">9)</strong>
+<strong class="text-danger">τ</strong> age, gpa (Student)
+
+
+<strong class="text-danger">10)</strong>
+<strong class="text-danger">π</strong> p_name, a_name (Assistant <strong class="text-danger">⋈</strong> A.dept_id = P.dept_id Professor(Assistant, Professor))
+
+
+<strong class="text-danger">11)</strong>
+<strong class="text-danger">Course</strong> ← (Course - <strong class="text-danger">σ</strong> name ‘Django’ (Course) U π name( <strong class="text-danger">σ</strong> name = “Java” (Course)))
+
+
+<strong class="text-danger">12)</strong>
+MAX := MAX(experience)
+<strong class="text-danger">π</strong> p_name, Y MAX(experience)(Professor)
+
+
+<strong class="text-danger">13)</strong>
+<strong class="text-danger">σ</strong> Assistant(Assistant <strong class="text-danger">⋈L</strong> A.dept_id = P.dept_id Professor(Assistant, Professor))
+ <strong class="text-danger">U</strong>
+<strong class="text-danger">σ</strong> Professor(Professor <strong class="text-danger">⋈R</strong> P.dept_id = P.dept_id Assistant(Professor,Assistant))
+
+
+<strong class="text-danger">14)</strong>
+<strong class="text-danger">π</strong> b_name, b_genre (Borrow <strong class="text-danger">⋈</strong> B.book_id = B.book_id Book(Borrow, Book))
+
+
+<strong class="text-danger">15)</strong>
+(<strong class="text-danger">π</strong> name, age (Assistant)) <strong class="text-danger">∩</strong> (<strong class="text-danger">π</strong> experience > 18 (Professor))
+
+                </code>
+            </pre>
+        </div>
+
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
