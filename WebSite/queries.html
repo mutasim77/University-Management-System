@@ -251,6 +251,10 @@ CALL showBooks();
 ALTER TABLE Student RENAME COLUMN sex INTO gender;
 
 
+<strong class="text-danger">25)Constaints that check the age of assistants before inserting</strong>
+ALTER TABLE Assistant add CONSTRAINT age CHECK (age > 18);
+
+
 <strong class="text-danger">26)Find the Books that exists in Library</strong>
 SELECT * FROM Books 
 WHERE EXISTS (SELECT * FROM Library);
