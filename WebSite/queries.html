@@ -243,16 +243,48 @@ DELIMITER ;
 CALL showBooks();
 
 
-<strong class="text-danger">24)</strong>
-SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+<strong class="text-danger">24)Create Trigger that count each time when student enroll the course(INSERT)</strong>
+DELIMITER $$
+CREATE TRIGGER insert_trigger 
+AFTER INSERT ON Enroll
+FOR EACH ROW 
+	BEGIN
+		UPDATE Counter SET insert_count = insert_count + 1;
+        END;
+
+SELECT * from Counter;
+INSERT INTO Enroll (student_id, course_id) VALUES ('200535184', 'INF-202');
 
 
-<strong class="text-danger">25)</strong>
-SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+<strong class="text-danger">25)Create Trigger that counts each time when kick out student from university(DELETE)</strong>
+DELIMITER $$
+CREATE TRIGGER delete_trigger 
+AFTER DELETE ON Student
+FOR EACH ROW 
+	BEGIN
+		UPDATE Counter SET delete_count = delete_count + 1;
+        END;
+
+SELECT * from Counter;
+DELETE FROM Student WHERE GPA = 1 LIMIT 1;
 
 
-<strong class="text-danger">26)</strong>
-SELECT COUNT(*) FROM Student WHERE Student.gpa = (SELECT COUNT(*) FROM Student where gpa < 1)
+
+<strong class="text-danger">26)Create Trigger that saves name of student whose gpa become less than 1(UPDATE)</strong>
+DELIMITER $$
+CREATE TRIGGER update_trigger 
+AFTER UPDATE ON Student
+FOR EACH ROW 
+	BEGIN
+    	  IF(NEW.gpa <= 1) THEN
+    		 INSERT INTO trigger_names(FullName) VALUES(NEW.name);
+          END IF;
+        END;
+
+
+SELECT * FROM trigger_names;
+UPDATE Student set Student.gpa = 1 where gpa = 2 LIMIT 1;
+
 
 
 

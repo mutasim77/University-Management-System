@@ -67,3 +67,49 @@ a{
 #inx, #tran{
     padding-left: 50px;
 }
+
+.header-text{
+    h1{
+        font-size: 3.5em;
+        text-shadow: #4b64f4 -5px -5px 10px;
+
+
+    }
+
+
+}
+#animate{
+    position: relative;
+    animation: animate 2s infinite linear;
+
+    @keyframes animate {
+        0%, 100%{
+            transform: translateY(-2em);
+        }
+        50%{
+            transform: translateY(0em);
+        }
+    }
+}
+
+#text-animate, #text-animate2{
+    position: relative;
+}
+
+#text-animate{
+    animation: animate-text 4s infinite linear;
+}
+
+#text-animate2{
+    animation: animate-text 4s infinite linear;
+    animation-delay: 2s;
+}
+
+@keyframes animate-text {
+    0%,100%{
+        transform: translateX(2em);
+    }
+    50%{
+        transform: translateX(-2em);
+    }
+}
