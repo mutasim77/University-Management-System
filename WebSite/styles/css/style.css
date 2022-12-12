@@ -85,15 +85,7 @@ a {
 
 #text-animate, #text-animate2 {
   position: relative;
-}
-
-#text-animate {
   animation: animate-text 4s infinite linear;
-}
-
-#text-animate2 {
-  animation: animate-text 4s infinite linear;
-  animation-delay: 2s;
 }
 
 @keyframes animate-text {
