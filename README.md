@@ -23,4 +23,4 @@ Database Management System - Final Project
 - Site was build from scratch with HTML/SCSS/BOOTSTRAP
 
 ### Thank you for reading, here's a cat:
-![image](https://user-images.githubusercontent.com/96326525/207107049-c13d5550-cd8c-4d86-9df1-b4efd8b3bac5.png)
+![image_processing20201220-28043-if6niq](https://user-images.githubusercontent.com/96326525/207108129-f495ec07-ff2b-4145-afba-bbe968fc3ba1.gif)
