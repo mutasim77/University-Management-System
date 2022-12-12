@@ -256,21 +256,7 @@ SELECT * from Counter;
 INSERT INTO Enroll (student_id, course_id) VALUES ('200535184', 'INF-202');
 
 
-<strong class="text-danger">25)Create Trigger that counts each time when kick out student from university(DELETE)</strong>
-DELIMITER $$
-CREATE TRIGGER delete_trigger 
-AFTER DELETE ON Student
-FOR EACH ROW 
-	BEGIN
-		UPDATE Counter SET delete_count = delete_count + 1;
-        END;
-
-SELECT * from Counter;
-DELETE FROM Student WHERE GPA = 1 LIMIT 1;
-
-
-
-<strong class="text-danger">26)Create Trigger that saves name of student whose gpa become less than 1(UPDATE)</strong>
+<strong class="text-danger">25)Create Trigger that saves name of student whose gpa become less than 1(UPDATE)</strong>
 DELIMITER $$
 CREATE TRIGGER update_trigger 
 AFTER UPDATE ON Student
@@ -286,6 +272,17 @@ SELECT * FROM trigger_names;
 UPDATE Student set Student.gpa = 1 where gpa = 2 LIMIT 1;
 
 
+<strong class="text-danger">26)Create Trigger that counts each time when kick out student from university(DELETE)</strong>
+DELIMITER $$
+CREATE TRIGGER delete_trigger 
+AFTER DELETE ON Student
+FOR EACH ROW 
+	BEGIN
+		UPDATE Counter SET delete_count = delete_count + 1;
+        END;
+
+SELECT * from Counter;
+DELETE FROM Student WHERE GPA = 1 LIMIT 1;
 
 
                 </code>
