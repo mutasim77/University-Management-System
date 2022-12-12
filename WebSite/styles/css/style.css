@@ -90,9 +90,9 @@ a {
 
 @keyframes animate-text {
   0%, 100% {
-    transform: translateX(2em);
+    transform: translateX(1em);
   }
   50% {
-    transform: translateX(-2em);
+    transform: translateX(-1em);
   }
 }/*# sourceMappingURL=style.css.map */

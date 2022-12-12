@@ -63,7 +63,7 @@
         <div class="d-flex justify-content-around bg-danger text-white p-2 fs-4 flex-column align-items-center"
             style="border-radius: 0 0 20px 20px;">
             <div>Function, Views, Subqueries, Joins, Procedures, Triggers</div>
-            <div>Total : 26</div>
+            <div>Total : 30</div>
         </div>
         <!-- queries  -->
         <div class="mt-5" id="que">
@@ -226,14 +226,18 @@ FROM Books JOIN Borrow
 ON Borrow.book_id = Books.book_id;
 
 
-<strong class="text-danger">22)Create view that shows name and age of assistants(View)</strong>
+<strong class="text-danger">22)Group Asistants by their age</strong>
+SELECT * FROM Assistant WHERE Assistant.age > 18 GROUP BY age;
+
+
+<strong class="text-danger">23)Create view that shows name and age of assistants(View)</strong>
 CREATE VIEW info_assistants AS
 SELECT Assistant.name, Assistant.age
 FROM Assistant;
 SELECT * FROM info_assistants;
 
 
-<strong class="text-danger">23)Create Procedure that shows all books in library(Procedure)</strong>
+<strong class="text-danger">24)Create Procedure that shows all books in library(Procedure)</strong>
 DELIMITER $$
     CREATE PROCEDURE showBooks()
     BEGIN
@@ -243,7 +247,20 @@ DELIMITER ;
 CALL showBooks();
 
 
-<strong class="text-danger">24)Create Trigger that count each time when student enroll the course(INSERT)</strong>
+<strong class="text-danger">25)Change Column name from Student(Alter, Rename)</strong>
+ALTER TABLE Student RENAME COLUMN sex INTO gender;
+
+
+<strong class="text-danger">26)Find the Books that exists in Library</strong>
+SELECT * FROM Books 
+WHERE EXISTS (SELECT * FROM Library);
+
+
+<strong class="text-danger">27)Change Student.name dataype(Alter)</strong>
+ALTER TABLE Student MODIFY name VARCHAR(250)
+
+
+<strong class="text-danger">28)Create Trigger that count each time when student enroll the course(INSERT)</strong>
 DELIMITER $$
 CREATE TRIGGER insert_trigger 
 AFTER INSERT ON Enroll
@@ -256,7 +273,7 @@ SELECT * from Counter;
 INSERT INTO Enroll (student_id, course_id) VALUES ('200535184', 'INF-202');
 
 
-<strong class="text-danger">25)Create Trigger that saves name of student whose gpa become less than 1(UPDATE)</strong>
+<strong class="text-danger">29)Create Trigger that saves name of student whose gpa become less than 1(UPDATE)</strong>
 DELIMITER $$
 CREATE TRIGGER update_trigger 
 AFTER UPDATE ON Student
@@ -272,7 +289,7 @@ SELECT * FROM trigger_names;
 UPDATE Student set Student.gpa = 1 where gpa = 2 LIMIT 1;
 
 
-<strong class="text-danger">26)Create Trigger that counts each time when kick out student from university(DELETE)</strong>
+<strong class="text-danger">30)Create Trigger that counts each time when kick out student from university(DELETE)</strong>
 DELIMITER $$
 CREATE TRIGGER delete_trigger 
 AFTER DELETE ON Student
